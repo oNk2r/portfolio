@@ -17,14 +17,14 @@ const NAVBAR = () => {
   ];
 
   return (
-    <header className="w-full text-[14px] font-sans mx-auto flex items-center mt-8 justify-between max-w-2xl">
+    <header className="w-full text-xs sm:text-[14px] font-sans mx-auto flex items-center mt-6 sm:mt-8 justify-between max-w-2xl">
       {/* Left: Command Palette trigger */}
-      <div>
+      <div className="shrink-0">
         <CommandPalette />
       </div>
 
       {/* Right: Navigation Links & Controls */}
-      <nav aria-label="Main Navigation" className="flex items-center gap-3 sm:gap-4">
+      <nav aria-label="Main Navigation" className="flex items-center gap-2 sm:gap-4">
         {navItems.map(({ href, label }) => {
           const isActive = href === "/" ? pathname === "/" : false;
 

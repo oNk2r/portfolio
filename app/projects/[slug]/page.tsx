@@ -62,7 +62,7 @@ const Page = async ({ params }: Props) => {
           )}
 
           {/* Links Block */}
-          <div className="w-full p-2 grid m-2 grid-cols-2 divide-x divide-neutral-200 dark:divide-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden text-sm bg-neutral-50/50 dark:bg-neutral-900/40">
+          <div className="grid mx-2 my-2 grid-cols-2 divide-x divide-neutral-200 dark:divide-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden text-sm bg-neutral-50/50 dark:bg-neutral-900/40">
             <Link
               href={project.github || siteConfig.socials.github}
               target="_blank"

@@ -73,6 +73,8 @@ const jsonLd = [
       siteConfig.socials.github,
       siteConfig.socials.linkedin,
       siteConfig.socials.twitter,
+      siteConfig.socials.discord,
+      siteConfig.socials.chess,
     ].filter(Boolean),
     knowsAbout: ["Next.js", "React", "TypeScript", "JavaScript", "Node.js", "Design Systems"],
   },

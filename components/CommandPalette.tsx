@@ -21,6 +21,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { SiDiscord, SiChessdotcom } from "react-icons/si";
 import siteConfig from "@/config/site";
 import {
   getSoundMuted,
@@ -255,6 +256,36 @@ export default function CommandPalette() {
         closePalette();
       },
     },
+    ...(siteConfig.socials.discord
+      ? [
+          {
+            id: "soc-discord",
+            title: "Discord Profile",
+            description: "Chat & connect on Discord",
+            category: "Social" as const,
+            icon: <SiDiscord size={15} className="text-[#5865F2]" />,
+            action: () => {
+              window.open(siteConfig.socials.discord, "_blank");
+              closePalette();
+            },
+          },
+        ]
+      : []),
+    ...(siteConfig.socials.chess
+      ? [
+          {
+            id: "soc-chess",
+            title: "Chess.com Profile",
+            description: "Play chess or check stats",
+            category: "Social" as const,
+            icon: <SiChessdotcom size={15} className="text-[#81b64c]" />,
+            action: () => {
+              window.open(siteConfig.socials.chess, "_blank");
+              closePalette();
+            },
+          },
+        ]
+      : []),
 
     // Fun & Easter Eggs
     {
@@ -301,7 +332,7 @@ export default function CommandPalette() {
 
   return (
     <>
-      {/* Trigger pill button (renders inside navbar) */}
+      {/* Trigger pill button (desktop) */}
       <button
         onClick={() => {
           playPopSound(1.1);
@@ -317,10 +348,22 @@ export default function CommandPalette() {
         </kbd>
       </button>
 
+      {/* Trigger icon button (mobile) */}
+      <button
+        onClick={() => {
+          playPopSound(1.1);
+          setIsOpen(true);
+        }}
+        className="sm:hidden inline-flex items-center justify-center p-1.5 text-neutral-500 dark:text-neutral-400 bg-neutral-100/80 dark:bg-neutral-900/80 hover:bg-neutral-200/80 dark:hover:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-800 rounded-md transition-colors cursor-pointer"
+        aria-label="Open Command Palette"
+      >
+        <Search size={14} />
+      </button>
+
       {/* Modal Dialog */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4">
+          <div className="fixed inset-0 z-50 flex items-start justify-center pt-14 sm:pt-20 px-3 sm:px-4">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -336,7 +379,7 @@ export default function CommandPalette() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -8 }}
               transition={{ duration: 0.18, ease: "easeOut" }}
-              className="relative w-full max-w-lg bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-2xl overflow-hidden z-10 flex flex-col max-h-[75vh]"
+              className="relative w-full max-w-lg bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-2xl overflow-hidden z-10 flex flex-col max-h-[82vh] sm:max-h-[75vh]"
             >
               {/* Search Bar */}
               <div className="flex items-center px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 gap-3">

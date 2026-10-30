@@ -3,7 +3,7 @@ import NAVBAR from "@/components/NAVBAR";
 
 export default function Home() {
   return (
-    <div className="flex flex-col px-3 flex-1 relative items-center justify-center font-sans">
+    <div className="flex flex-col px-3.5 sm:px-4 flex-1 relative items-center justify-center font-sans w-full max-w-full overflow-x-hidden">
       <NAVBAR />
       <Page.Profile />
       <Page.About />

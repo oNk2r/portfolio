@@ -23,6 +23,8 @@ export interface SiteConfig {
     twitter: string;
     linkedin: string;
     telegram?: string;
+    discord?: string;
+    chess?: string;
   };
   githubUsername: string;
   calCom?: {
@@ -72,6 +74,8 @@ export const siteConfig: SiteConfig = {
     twitter: "https://x.com/oNk2r",
     linkedin: "https://www.linkedin.com/in/onkar-tulshigar",
     telegram: "https://t.me/oNk2r",
+    discord: "https://discord.com/users/oskarr.exe",
+    chess: "https://www.chess.com/member/onk2rx",
   },
 
   // GitHub Activity
