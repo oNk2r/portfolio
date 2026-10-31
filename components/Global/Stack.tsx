@@ -17,7 +17,6 @@ import {
   SiGithub,
 } from "react-icons/si";
 import { Globe, Radio, Bot, DatabaseZap } from "lucide-react";
-import { playPopSound } from "@/lib/click-sound";
 
 interface SkillItem {
   name: string;
@@ -166,7 +165,6 @@ const Stack = () => {
               {category.skills.map((skill) => (
                 <div
                   key={skill.name}
-                  onMouseEnter={() => playPopSound(1.3)}
                   className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200/80 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-all cursor-default select-none group"
                 >
                   <span className="shrink-0 transition-transform group-hover:scale-110">

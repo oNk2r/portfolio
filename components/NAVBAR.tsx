@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
-import SoundToggle from "./SoundToggle";
 import CommandPalette from "./CommandPalette";
 
 const NAVBAR = () => {
@@ -44,8 +43,7 @@ const NAVBAR = () => {
           );
         })}
 
-        <div className="flex items-center gap-1 pl-1 border-l border-neutral-200 dark:border-neutral-800">
-          <SoundToggle />
+        <div className="flex items-center pl-1 border-l border-neutral-200 dark:border-neutral-800">
           <ThemeToggle />
         </div>
       </nav>

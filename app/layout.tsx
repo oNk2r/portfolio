@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, JetBrains_Mono, Instrument_Serif } from "next/font/g
 import "./globals.css";
 import Provider from "@/app/Provider";
 import siteConfig from "@/config/site";
+import KonamiCode from "@/components/EasterEgg/KonamiCode";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -34,12 +35,21 @@ export const metadata: Metadata = {
     siteName: "oNk2r",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: siteConfig.ogImage || "/og-image.png",
+        width: 878,
+        height: 302,
+        alt: siteConfig.name,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "oNk2r",
     description: siteConfig.headline,
     creator: siteConfig.handle,
+    images: [siteConfig.ogImage || "/og-image.png"],
   },
   robots: {
     index: true,
@@ -104,7 +114,10 @@ export default function RootLayout({
             __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
           }}
         />
-        <Provider>{children}</Provider>
+        <Provider>
+          {children}
+          <KonamiCode />
+        </Provider>
       </body>
     </html>
   );

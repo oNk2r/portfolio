@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
-import { playClickSound, toggleSoundMuted, playPopSound } from "@/lib/click-sound";
 
 function GlobalShortcutsListener() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -36,22 +35,8 @@ function GlobalShortcutsListener() {
       ) {
         event.preventDefault();
         const nextTheme = themeRef.current === "dark" ? "light" : "dark";
-        playClickSound(nextTheme);
         setTheme(nextTheme);
         return;
-      }
-
-      // M key: Toggle audio mute
-      if (
-        !isCtrlOrMeta &&
-        !event.altKey &&
-        !event.shiftKey &&
-        (event.key.toLowerCase() === "m" || event.code === "KeyM")
-      ) {
-        const isMuted = toggleSoundMuted();
-        if (!isMuted) {
-          playPopSound(1.2);
-        }
       }
     };
 

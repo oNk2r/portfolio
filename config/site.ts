@@ -27,6 +27,7 @@ export interface SiteConfig {
     chess?: string;
   };
   githubUsername: string;
+  chessUsername?: string;
   calCom?: {
     namespace: string;
     enabled: boolean;
@@ -78,8 +79,9 @@ export const siteConfig: SiteConfig = {
     chess: "https://www.chess.com/member/onk2rx",
   },
 
-  // GitHub Activity
+  // GitHub & Chess Profiles
   githubUsername: "oNk2r",
+  chessUsername: "onk2rx",
 
 
   // Inspirational Quote

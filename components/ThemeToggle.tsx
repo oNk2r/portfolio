@@ -10,7 +10,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { playClickSound } from "@/lib/click-sound";
 
 export default function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -30,7 +29,6 @@ export default function ThemeToggle() {
 
   const handleToggle = () => {
     const nextTheme = isDark ? "light" : "dark";
-    playClickSound(nextTheme);
     setTheme(nextTheme);
   };
 

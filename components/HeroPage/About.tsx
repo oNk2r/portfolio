@@ -4,7 +4,8 @@ import Link from "next/link";
 import siteConfig from "@/config/site";
 import { Mail, ArrowUpRight } from "lucide-react";
 import { FaGithub, FaXTwitter, FaLinkedin } from "react-icons/fa6";
-import { SiDiscord, SiChessdotcom } from "react-icons/si";
+import { SiDiscord } from "react-icons/si";
+import ChessBadge from "@/components/Chess/ChessBadge";
 
 const About = () => {
   return (
@@ -68,18 +69,7 @@ const About = () => {
           </Link>
         )}
 
-        {siteConfig.socials.chess && (
-          <Link
-            href={siteConfig.socials.chess}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-medium transition group"
-          >
-            <SiChessdotcom className="size-3.5 text-[#81b64c]" />
-            <span>Chess</span>
-            <ArrowUpRight className="size-3 text-neutral-400 group-hover:text-neutral-700 dark:group-hover:text-neutral-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-        )}
+        {siteConfig.socials.chess && <ChessBadge />}
 
         {siteConfig.email && (
           <Link

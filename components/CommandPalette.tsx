@@ -13,8 +13,6 @@ import {
   GraduationCap,
   Sun,
   Moon,
-  Volume2,
-  VolumeX,
   Copy,
   Check,
   Download,
@@ -23,13 +21,6 @@ import {
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { SiDiscord, SiChessdotcom } from "react-icons/si";
 import siteConfig from "@/config/site";
-import {
-  getSoundMuted,
-  setSoundMuted,
-  playClickSound,
-  playPopSound,
-  playChimeSound,
-} from "@/lib/click-sound";
 
 interface CommandItem {
   id: string;
@@ -63,12 +54,7 @@ export default function CommandPalette() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        setIsOpen((prev) => {
-          if (!prev) {
-            playPopSound(1.1);
-          }
-          return !prev;
-        });
+        setIsOpen((prev) => !prev);
       } else if (e.key === "Escape" && isOpen) {
         e.preventDefault();
         closePalette();
@@ -89,7 +75,6 @@ export default function CommandPalette() {
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
     setCopiedAction(label);
-    playPopSound(1.3);
     setTimeout(() => setCopiedAction(null), 2000);
   };
 
@@ -174,21 +159,7 @@ export default function CommandPalette() {
       shortcut: "Ctrl+D",
       action: () => {
         const nextTheme = isDark ? "light" : "dark";
-        playClickSound(nextTheme);
         setTheme(nextTheme);
-        closePalette();
-      },
-    },
-    {
-      id: "act-sound",
-      title: getSoundMuted() ? "Unmute Sound FX" : "Mute Sound FX",
-      description: "Toggle zero-latency synthesized tactile audio",
-      category: "Actions",
-      icon: getSoundMuted() ? <VolumeX size={16} /> : <Volume2 size={16} />,
-      action: () => {
-        const next = !getSoundMuted();
-        setSoundMuted(next);
-        if (!next) playPopSound(1.2);
         closePalette();
       },
     },
@@ -276,7 +247,7 @@ export default function CommandPalette() {
           {
             id: "soc-chess",
             title: "Chess.com Profile",
-            description: "Play chess or check stats",
+            description: `Play @${siteConfig.chessUsername || "onk2rx"} or view live stats`,
             category: "Social" as const,
             icon: <SiChessdotcom size={15} className="text-[#81b64c]" />,
             action: () => {
@@ -289,13 +260,16 @@ export default function CommandPalette() {
 
     // Fun & Easter Eggs
     {
-      id: "fun-chime",
-      title: "Play Harmonic Chime",
-      description: "Synthesize an airy 4-voice arpeggio",
+      id: "fun-konami",
+      title: "Konami Code (God Mode)",
+      description: "Trigger secret arcade Easter egg (↑ ↑ ↓ ↓ ← → ← → B A)",
       category: "Fun",
-      icon: <Sparkles size={16} className="text-amber-500" />,
+      icon: <Sparkles size={16} className="text-emerald-400" />,
       action: () => {
-        playChimeSound();
+        closePalette();
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent("trigger-konami"));
+        }, 120);
       },
     },
   ];
@@ -317,13 +291,11 @@ export default function CommandPalette() {
       setSelectedIndex((prev) =>
         prev < filteredCommands.length - 1 ? prev + 1 : 0
       );
-      playPopSound(0.9);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setSelectedIndex((prev) =>
         prev > 0 ? prev - 1 : filteredCommands.length - 1
       );
-      playPopSound(0.9);
     } else if (e.key === "Enter" && filteredCommands[selectedIndex]) {
       e.preventDefault();
       filteredCommands[selectedIndex].action();
@@ -335,7 +307,6 @@ export default function CommandPalette() {
       {/* Trigger pill button (desktop) */}
       <button
         onClick={() => {
-          playPopSound(1.1);
           setIsOpen(true);
         }}
         className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-100/80 dark:bg-neutral-900/80 hover:bg-neutral-200/80 dark:hover:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-800 rounded-md transition-colors cursor-pointer"
@@ -351,7 +322,6 @@ export default function CommandPalette() {
       {/* Trigger icon button (mobile) */}
       <button
         onClick={() => {
-          playPopSound(1.1);
           setIsOpen(true);
         }}
         className="sm:hidden inline-flex items-center justify-center p-1.5 text-neutral-500 dark:text-neutral-400 bg-neutral-100/80 dark:bg-neutral-900/80 hover:bg-neutral-200/80 dark:hover:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-800 rounded-md transition-colors cursor-pointer"
